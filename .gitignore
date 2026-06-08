@@ -3,3 +3,13 @@ Arquivos Json/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Arquivos locais
+Descrição Projeto.txt
+executor-projeto-pos-engenharia-dados-ia.md
+mentor-projeto-pos-engenharia-dados-ia.md
+Narrativa IA.m4a
+
+# Notebooks descartáveis (carga inicial)
+Scripts Python/06_carga_inicial_batch.ipynb
+Scripts Python/07_classificacao_inicial_batch.ipynb
