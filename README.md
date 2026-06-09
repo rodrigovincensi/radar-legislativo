@@ -109,6 +109,12 @@ Banco PostgreSQL hospedado no Supabase com mais de 117.000 registros.
 
 > [Acesso de leitura público — 100 proposições com resumo e tema](https://arcasxudbwacekjffehu.supabase.co/rest/v1/proposicoes?select=id,siglaTipo,numero,ementa,resumo,tema&limit=100&apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyY2FzeHVkYndhY2VramZmZWh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0OTkxOTMsImV4cCI6MjA5NjA3NTE5M30.zZYTIjva4PfNQIu4Cwu_lHLjd2X1Do4n3ozUc7vMR8M)
 
+## Dashboard
+
+> [radar-legislativo.streamlit.app](https://radar-legislativo.streamlit.app)
+
+KPIs, gráficos por tema e tipo, volume de apresentações por semana e tabela com resumos gerados pela IA. Atualizado automaticamente pelo pipeline diário.
+
 ## Automação
 
 ### Pipeline Diário (Task Scheduler)
