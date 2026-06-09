@@ -1,0 +1,135 @@
+{
+  "name": "radar-legislativo-briefing-semanal",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1d8d17cb-a2ea-4263-bc79-d751e14b213d",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT DISTINCT ON (tema) tema, \"siglaTipo\", numero, \"dataApresentacao\", ementa, resumo\nFROM proposicoes\nWHERE resumo IS NOT NULL\n  AND tema IS NOT NULL\n  AND \"siglaTipo\" IN ('PL', 'PEC', 'PLP', 'MPV', 'PDL')\nORDER BY tema, \"dataApresentacao\" DESC",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        208,
+        0
+      ],
+      "id": "4fa7e77c-051a-4a89-8437-af944072b691",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "MWxas6Zh2I4ZlSY4",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet html = \"<h2>Radar Legislativo — Briefing Semanal</h2>\";\n\nfor (const item of items) {\n  const d = item.json;\n  const data = d.dataApresentacao.substring(0, 10);\n  html += `<h3>${d.tema}</h3>`;\n  html += `<p><strong>${d.siglaTipo} ${d.numero}</strong> — ${data}</p>`;\n  html += `<p>${d.resumo}</p><hr>`;\n}\n\nreturn [{ json: { html } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "aa6abd12-fcf6-41de-8b07-8db143c7965a",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "fromEmail": "rodrigovincensi@gmail.com",
+        "toEmail": "rodrigovincensi@gmail.com",
+        "subject": "Radar Legislativo — Briefing Semanal",
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        624,
+        0
+      ],
+      "id": "61b53c64-518e-433c-8fe6-33b871aad80c",
+      "name": "Send an Email",
+      "webhookId": "fd71ad7f-150a-498d-81c8-7e4e2917b40d",
+      "credentials": {
+        "smtp": {
+          "id": "b9x56DYirrtm0fXr",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "43e7d4b5-e786-4600-9091-a1387642773a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "af77a6fbc5bc5db46144ade64d20dd854e295e9171814fab29767ffa1c81d8f4"
+  },
+  "nodeGroups": [],
+  "id": "5G5UmWQ4mLTTCTWC",
+  "tags": []
+}
