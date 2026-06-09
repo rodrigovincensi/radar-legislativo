@@ -107,7 +107,7 @@ python "Scripts Python/pipeline_diario.py"
 
 Banco PostgreSQL hospedado no Supabase com mais de 117.000 registros.
 
-> Link de acesso em modo leitura: *[a adicionar]*
+> Link do projeto no Supabase: https://supabase.com/dashboard/project/arcasxudbwacekjffehu
 
 ## Automação
 
