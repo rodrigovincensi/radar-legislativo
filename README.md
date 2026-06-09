@@ -115,6 +115,10 @@ Banco PostgreSQL hospedado no Supabase com mais de 117.000 registros.
 
 KPIs, gráficos por tema e tipo, volume de apresentações por semana e tabela com resumos gerados pela IA. Atualizado automaticamente pelo pipeline diário.
 
+![Dashboard — KPIs e gráficos](assets/dashboard_1.png)
+
+![Dashboard — tabela de resumos](assets/dashboard_2.png)
+
 ## Automação
 
 ### Pipeline Diário (Task Scheduler)
