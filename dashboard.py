@@ -105,7 +105,7 @@ st.subheader("Volume de apresentações por semana — últimos 30 dias")
 if not df.empty:
     df_t = df.copy()
     df_t["semana"] = pd.to_datetime(df_t["dataApresentacao"]).dt.to_period("W").dt.start_time
-    por_semana = df_t.groupby("semana").size().reset_index(name="Qtd")
+    por_semana = df_t.groupby("semana").size().reset_index(name="Qtd").tail(5)
     fig3 = px.bar(por_semana, x="semana", y="Qtd",
                   color_discrete_sequence=["#1e3a5f"], height=300)
     fig3.update_layout(xaxis_title="Semana", yaxis_title="Proposições")
