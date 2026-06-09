@@ -136,4 +136,6 @@ Workflow n8n configurado para toda segunda-feira às 8h:
 
 **Email recebido:**
 
-![Email recebido](assets/email_pipeline.png)
+![Email recebido — topo](assets/email_pipeline_topo.png)
+
+![Email recebido — botão dashboard](assets/email_pipeline_dashboard.png)
