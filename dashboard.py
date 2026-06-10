@@ -44,20 +44,21 @@ def carregar_totais():
 st.title("🏛️ Radar Legislativo")
 st.caption("Monitoramento automatizado da Câmara dos Deputados")
 
+# ── Carregar dados ────────────────────────────────────────────────────────────
+df = carregar_proposicoes()
+totais = carregar_totais()
+
 # ── Sidebar ──────────────────────────────────────────────────────────────────
+tipos_disponiveis = sorted(df["siglaTipo"].dropna().unique().tolist())
 with st.sidebar:
     st.header("Filtros")
-    tipo_sel = st.selectbox("Tipo de proposição", ["Todos", "PL", "PEC", "PLP", "MPV", "PDL"])
+    tipo_sel = st.selectbox("Tipo de proposição", ["Todos"] + tipos_disponiveis)
     tema_sel = st.multiselect("Tema", [
         "Tributação e impostos", "Saúde pública e medicina", "Educação e ensino",
         "Meio ambiente e sustentabilidade", "Trabalho e emprego", "Segurança pública e crime",
         "Tecnologia e inovação", "Infraestrutura e transporte",
         "Economia e finanças públicas", "Direitos humanos e cidadania"
     ])
-
-# ── Carregar dados ────────────────────────────────────────────────────────────
-df = carregar_proposicoes()
-totais = carregar_totais()
 
 if tipo_sel != "Todos":
     df = df[df["siglaTipo"] == tipo_sel]
